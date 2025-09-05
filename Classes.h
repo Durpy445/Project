@@ -232,18 +232,7 @@ class Cube : public Object {
             NumberOfTriangles = 12;
         }
 
-        void CreateOGL()override {
-            unsigned int Temp[] = {0,2,4,4,2,6,1,5,3,3,5,7,0,4,1,1,4,5,2,3,6,6,3,7,0,1,2,4,6,5,5,6,7};
-            for (size_t i = 0; i < sizeof(Temp); i++)
-            {
-                this->GLOrder[i] = Temp[i];
-                this->GLVerticies[i * 3] = RelativeVertices[Temp[i]].X;
-                this->GLVerticies[i * 3 + 1] = RelativeVertices[Temp[i]].Y;
-                this->GLVerticies[i * 3 + 2] = RelativeVertices[Temp[i]].Z;
-                printf("%d,%d,%d,%d \n", Temp[i], RelativeVertices[Temp[i]].X, RelativeVertices[Temp[i]].Y, RelativeVertices[Temp[i]].Z);
-            }
-         
-        }
+        
 
         void CreateRelVert()override {
             this->RelativeVertices[0] = Vector3(Size.X / 2,Size.Y / 2, Size.Z / 2); //+++
@@ -257,6 +246,20 @@ class Cube : public Object {
             
             ApplyRotation();
             CreateAbsVert();
+        }
+
+        void CreateOGL()override {
+            unsigned int Temp[] = { 0,2,4,4,2,6,1,5,3,3,5,7,0,4,1,1,4,5,2,3,6,6,3,7,0,1,2,4,6,5,5,6,7 };
+            for (size_t i = 0; i < sizeof(Temp); i++)
+            {
+                this->GLOrder[i] = Temp[i];
+                printf("a%db%d", RelativeVertices,i);
+                this->GLVerticies[i * 3] = RelativeVertices[Temp[i]].X;
+                this->GLVerticies[i * 3 + 1] = RelativeVertices[Temp[i]].Y;
+                this->GLVerticies[i * 3 + 2] = RelativeVertices[Temp[i]].Z;
+                printf("%d,%d,%d,%d \n", Temp[i], RelativeVertices[Temp[i]].X, RelativeVertices[Temp[i]].Y, RelativeVertices[Temp[i]].Z);
+            }
+
         }
         
         void CreateRelTriangles()override {
